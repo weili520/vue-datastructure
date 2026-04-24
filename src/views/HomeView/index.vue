@@ -49,6 +49,13 @@
           <p>展示 AVL 树的高度、平衡因子和旋转恢复过程，适合观察失衡后的结构调整。</p>
           <span class="view__card-link">进入演示</span>
         </RouterLink>
+
+        <RouterLink class="view__card" to="/red-black-tree">
+          <span class="view__card-index">04</span>
+          <h3>红黑树</h3>
+          <p>展示红黑树的插入、删除、搜索、变色旋转与深度优先遍历过程。</p>
+          <span class="view__card-link">进入演示</span>
+        </RouterLink>
       </div>
     </section>
 
