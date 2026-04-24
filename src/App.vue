@@ -1,8 +1,8 @@
-<template>
-  <header class="app-shell-nav">
-    <RouterLink to="/">首页</RouterLink>
-    <RouterLink to="/binary-tree">二叉树</RouterLink>
-  </header>
+<script setup lang="ts">
+import AppHeader from './components/AppHeader.vue'
+</script>
 
+<template>
+  <AppHeader />
   <RouterView />
 </template>
