@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+
+import HomeView from '../views/HomeView/index.vue'
+import SortingView from '../views/SortingView/index.vue'
 import BinaryTreeView from '../views/BinaryTreeView.vue'
 import BalancedBinaryTreeView from '../views/BalancedBinaryTreeView.vue'
 
@@ -18,6 +20,11 @@ const routes: RouteRecordRaw[] = [
     path: '/balanced-binary-tree',
     name: 'balanced-binary-tree',
     component: BalancedBinaryTreeView,
+  },
+  {
+    path: '/sorting',
+    name: 'sorting',
+    component: SortingView,
   },
 ]
 

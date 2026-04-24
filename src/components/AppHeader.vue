@@ -12,6 +12,7 @@
     </RouterLink>
 
     <nav class="app-header__nav" aria-label="主导航">
+      <RouterLink to="/sorting">排序算法</RouterLink>
       <RouterLink to="/binary-tree">二叉树</RouterLink>
       <RouterLink to="/balanced-binary-tree">平衡二叉树</RouterLink>
     </nav>
