@@ -5,6 +5,7 @@ import SortingView from '../views/SortingView/index.vue'
 import BinaryTreeView from '../views/BinaryTreeView.vue'
 import BalancedBinaryTreeView from '../views/BalancedBinaryTreeView.vue'
 import RedBlackTreeView from '../views/RedBlackTreeView/index.vue'
+import CodeTest from '../views/codeRun.vue'
 
 const routes: RouteRecordRaw[] = [
   {
@@ -31,6 +32,11 @@ const routes: RouteRecordRaw[] = [
     path: '/sorting',
     name: 'sorting',
     component: SortingView,
+  },
+  {
+    path: '/test',
+    name: 'codeTest',
+    component: CodeTest,
   },
 ]
 

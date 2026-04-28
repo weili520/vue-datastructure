@@ -19,6 +19,13 @@ type InsertResult = {
     path: TreeNode[];
 }
 
+type SearchResult = {
+    path: TreeNode[];
+    parent: null | TreeNode;
+    founded: boolean;
+    node?: TreeNode;
+}
+
 class Tree {
     root: TreeNode | null;
 
@@ -26,6 +33,7 @@ class Tree {
         this.root = null;
     }
 
+    /** 插入 */
     private insertNode(root: TreeNode, node: TreeNode): InsertResult {
         const path: TreeNode[] = [];
         let current: TreeNode | null = root;
@@ -44,10 +52,10 @@ class Tree {
                 };
             }
 
-            if (node.value < current.value) {
+            if (node.value <= current.value) {
                 if (!current.left) {
                     current.left = node;
-                    path.push(node);
+                    // path.push(node);
                     return {
                         inserted: true,
                         node,
@@ -60,7 +68,7 @@ class Tree {
             } else {
                 if (!current.right) {
                     current.right = node;
-                    path.push(node);
+                    // path.push(node);
                     return {
                         inserted: true,
                         node,
@@ -80,8 +88,6 @@ class Tree {
             path,
         };
     }
-
-    /** 插入 */
     insert(value: TreeNodeValue): InsertResult {
         const node = new TreeNode(value);
 
@@ -99,8 +105,68 @@ class Tree {
         return this.insertNode(this.root, node);
     }
 
-    search() {
+    /** 搜索 */
+    searchNode(curNode: TreeNode | null, value: TreeNodeValue): SearchResult {
+        let _curNode = curNode;
+        const _path: TreeNode[] = [];
+        let _parent: TreeNode | null = null;
 
+        while (_curNode) {
+            _path.push(_curNode);
+
+            if (_curNode.value === value) {
+                return {
+                    path: _path,
+                    node: _curNode,
+                    parent: _parent,
+                    founded: true
+                }
+            }
+
+            if (value < _curNode.value) {
+                if (!_curNode.left) {
+                    return {
+                        path: _path,
+                        parent: _parent,
+                        founded: false
+                    }
+                }
+
+                _parent = _curNode;
+                _curNode = _curNode.left
+            } else {
+                if (!_curNode.right) {
+                    return {
+                        path: _path,
+                        parent: _parent,
+                        founded: false
+                    }
+                }
+
+                _parent = _curNode;
+                _curNode = _curNode.right
+            }
+        }
+
+        return {
+            path: [],
+            parent: null,
+            founded: false,
+        }
+    }
+    search(value: TreeNodeValue) {
+        return this.searchNode(this.root, value)
+    }
+
+    /** 删除 */
+    delete(value: TreeNodeValue) {
+        const _target = this.searchNode(this.root, value)
+
+        if (_target?.founded) {
+            const _curNode = _target.node
+
+            _target.node = undefined;
+        }
     }
 }
 
