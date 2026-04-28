@@ -4,7 +4,7 @@
 
 <script setup lang='ts'>
 import { onMounted } from 'vue';
-import { fn as TestFn } from '../algorithms/tree.test'
+import { fn as TestFn } from '../algorithms/Tree/BST/tree.test'
 
 onMounted(() => {
     TestFn()

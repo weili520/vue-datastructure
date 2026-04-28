@@ -21,4 +21,19 @@ export const fn = () => {
     const s2 = bsTree.search(15);
     console.log('search 15', s2?.path.map(_item => _item.value) ?? []);
     console.log('search parent', s2?.parent?.value);
+
+    console.log('--------------------');
+    const _prePath: any[] = []
+    bsTree.preOrderTraversal(bsTree.root, val => _prePath.push(val))
+    console.log('pre order', _prePath);
+
+    console.log('--------------------');
+    const _inOrderPath: any[] = []
+    bsTree.inOrderTraversal(bsTree.root, val => _inOrderPath.push(val))
+    console.log('in order', _inOrderPath);
+
+    console.log('--------------------');
+    const _portOrderPath: any[] = []
+    bsTree.postOrderTraversal(bsTree.root, val => _portOrderPath.push(val))
+    console.log('post order', _portOrderPath);
 }

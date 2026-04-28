@@ -127,7 +127,7 @@ class Tree {
                 if (!_curNode.left) {
                     return {
                         path: _path,
-                        parent: _parent,
+                        parent: _curNode,
                         founded: false
                     }
                 }
@@ -138,7 +138,7 @@ class Tree {
                 if (!_curNode.right) {
                     return {
                         path: _path,
-                        parent: _parent,
+                        parent: _curNode,
                         founded: false
                     }
                 }
@@ -158,16 +158,100 @@ class Tree {
         return this.searchNode(this.root, value)
     }
 
-    /** 删除 */
-    delete(value: TreeNodeValue) {
-        const _target = this.searchNode(this.root, value)
+    /** 获取 最小值 节点 */
+    private findMin(node: TreeNode): TreeNode {
+        let current = node;
 
-        if (_target?.founded) {
-            const _curNode = _target.node
-
-            _target.node = undefined;
+        while (current.left) {
+            current = current.left;
         }
+
+        return current;
     }
+
+    private findMax(node: TreeNode): TreeNode {
+        let current = node;
+
+        while (current.right) {
+            current = current.right;
+        }
+
+        return current;
+    }
+
+    /** 
+     * 删除某个节点。三种节点之一: 
+     * 1）没有叶子 的节点
+     * 2）单个叶子 的节点
+     * 3）左右叶子 的节点
+     * */
+    private deleteNode(node: TreeNode | null, value: TreeNodeValue): TreeNode | null {
+        if (!node) return null;
+
+        if (value < node.value) {
+            node.left = this.deleteNode(node.left, value);
+            return node;
+        }
+
+        if (value > node.value) {
+            node.right = this.deleteNode(node.right, value);
+            return node;
+        }
+
+        // 单叶子 节点
+        if (!node.left) return node.right;
+        if (!node.right) return node.left;
+
+        // 双叶子节点
+        const _rightTreeMin = this.findMin(node.right); // 找到右侧最小的节点；亦可找到左侧最大节点
+        // const _maxNode = this.findMax(node.left);
+        node.value = _rightTreeMin.value;
+        node.right = this.deleteNode(node.right, _rightTreeMin.value);
+        return node;
+    }
+    delete(value: TreeNodeValue) {
+        this.root = this.deleteNode(this.root, value)
+    }
+
+    /**
+     * 先序遍历
+     */
+    preOrderTraversal(node: TreeNode | null, callback: (value: TreeNodeValue) => void) {
+        if (!node) {
+            return
+        }
+
+        callback(node.value)
+        this.preOrderTraversal(node.left, callback)
+        this.preOrderTraversal(node.right, callback)
+    }
+
+    /**
+     * 中序遍历
+     */
+    inOrderTraversal(node: TreeNode | null, callback: (value: TreeNodeValue) => void) {
+        if (!node) {
+            return
+        }
+
+        this.preOrderTraversal(node.left, callback)
+        callback(node.value)
+        this.preOrderTraversal(node.right, callback)
+    }
+
+    /**
+         * 后序遍历
+         */
+    postOrderTraversal(node: TreeNode | null, callback: (value: TreeNodeValue) => void) {
+        if (!node) {
+            return
+        }
+
+        this.preOrderTraversal(node.left, callback)
+        this.preOrderTraversal(node.right, callback)
+        callback(node.value)
+    }
+
 }
 
 export default Tree
