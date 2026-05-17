@@ -16,6 +16,7 @@
       <RouterLink to="/binary-tree">二叉树</RouterLink>
       <RouterLink to="/balanced-binary-tree">平衡二叉树(AVL)</RouterLink>
       <RouterLink to="/red-black-tree">红黑树</RouterLink>
+      <RouterLink to="/timeline">时间轴</RouterLink>
     </nav>
   </header>
 </template>

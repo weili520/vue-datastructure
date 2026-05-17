@@ -38,6 +38,11 @@ const routes: RouteRecordRaw[] = [
     name: 'codeTest',
     component: CodeTest,
   },
+  {
+    path: '/timeline',
+    name: 'timeLine',
+    component: ()=> import('../views/Timeline/index.vue'),
+  },
 ]
 
 const router = createRouter({
